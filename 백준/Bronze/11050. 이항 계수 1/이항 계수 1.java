@@ -13,13 +13,14 @@ public class Main {
 
         // 이항계수 : n개 중에 k개 만큼 뽑는 조합의 수
         // 공식 : n! / (n-k)!k!
-        if(k==0 || n==0 || (n-k) == 0){
+        if (k == 0 || (n - k) == 0) {
             System.out.println(1);
         } else {
             System.out.println(fac(n) / (fac(n - k) * fac(k)));
         }
     }
-    public static int fac(int n){
-        return n <= 1 ? n : n * fac(n-1);
+
+    public static int fac(int n) {
+        return n <= 1 ? n : n * fac(n - 1);
     }
 }
