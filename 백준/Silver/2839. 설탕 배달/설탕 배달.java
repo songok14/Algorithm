@@ -10,15 +10,21 @@ public class Main {
         br.close();
 
         while (N >= 0) {
-            if (N % 5 == 0) { 
-                count += N / 5; 
-                System.out.println(count); 
-                return; 
+            if (N % 5 == 0) {   // 0 이어도 실행
+                count += N / 5;
+                N %= 5;
+                break;
             }
             N -= 3;
             count++;
         }
 
-        System.out.println(-1);
+        if(N == 0) {
+            System.out.println(count);
+        } else {
+            System.out.println(-1);
+        }
+
+
     }
 }
