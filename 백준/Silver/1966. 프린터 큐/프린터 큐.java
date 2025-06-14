@@ -31,6 +31,7 @@ public class Main {
                 if (q.peek()[0] == list.get(index)) {
                     if(q.peek()[1] == m){
                         System.out.println(++count);
+                        break;
                     }
                     q.poll();
                     index++;
