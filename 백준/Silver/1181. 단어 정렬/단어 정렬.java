@@ -5,34 +5,33 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringBuilder sb = new StringBuilder();
+        StringBuffer sb = new StringBuffer();
 
         int testCase = Integer.parseInt(br.readLine());
-        String[][] words = new String[testCase][2];
+        String[] strArr = new String[testCase];
 
-        for (int i = 0; i < testCase; i++) {
-            words[i][0] = br.readLine();
-            words[i][1] = String.valueOf(words[i][0].length());
+        for (int i = 0; i < strArr.length; i++) {
+            strArr[i] = br.readLine();
         }
 
-        Arrays.sort(words, (w1, w2) -> {
-            if (Integer.parseInt(w1[1]) == Integer.parseInt(w2[1])) {
-                return w1[0].compareTo(w2[0]);
+        Arrays.sort(strArr, (o1, o2) -> {
+            if (o1.length() == o2.length()) {
+                return o1.compareTo(o2);
             } else {
-                return Integer.parseInt(w1[1]) - Integer.parseInt(w2[1]);
+                return o1.length() - o2.length();
             }
         });
 
-        for(int i=0; i<testCase; i++){
-            if(i>0 && words[i][0].equals(words[i-1][0])){
-                continue;
+        sb.append(strArr[0]).append("\n");
+        for (int i = 1; i < strArr.length; i++) {
+            if (!strArr[i].equals(strArr[i - 1])) {
+                sb.append(strArr[i]).append("\n");
             }
-            sb.append(words[i][0]).append("\n");
         }
 
         bw.write(sb.toString());
         bw.flush();
-        br.close();
         bw.close();
+        br.close();
     }
 }
