@@ -18,7 +18,9 @@ public class Main {
         for (int i=0; i<n; i++){
             trees[i] = Integer.parseInt(inputs[i]);
 
-            max = Math.max(max, trees[i]);
+            if (max < trees[i]){
+                max = trees[i];
+            }
         }
 
         while (min < max) {
