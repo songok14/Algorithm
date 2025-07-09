@@ -42,11 +42,6 @@ public class Main {
                 }
             }
 
-            if (myQ.isEmpty()){
-                sb.append("[]").append("\n");
-                continue loop;
-            }
-
             sb.append("[");
             while (!myQ.isEmpty()) {
                 if (direction) {
