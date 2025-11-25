@@ -5,22 +5,21 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
-        String[] inputs = br.readLine().split(" ");
-        int n = Integer.parseInt(inputs[0]);
-        int target = Integer.parseInt(inputs[1]);
-
-        String[] numbers = br.readLine().split(" ");
+        int[] testCase = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        int N = testCase[0];
+        int M = testCase[1];
 
         List<Integer> myList = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            myList.add(Integer.parseInt(numbers[i]));
+        int[] numbers = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
+        for (int i : numbers) {
+            myList.add(i);
         }
         myList.sort(Comparator.naturalOrder());
 
         Set<List<Integer>> result = new LinkedHashSet<>();
-        combi(myList, new ArrayList<>(), result, target, 0);
+        back(myList, new ArrayList<>(), result, M, 0);
 
         for (List<Integer> list : result) {
             for (int i : list) {
@@ -35,15 +34,15 @@ public class Main {
         br.close();
     }
 
-    public static void combi(List<Integer> myList, List<Integer> temp, Set<List<Integer>> result, int target, int start) {
-        if (temp.size() == target) {
+    public static void back(List<Integer> myList, List<Integer> temp, Set<List<Integer>> result, int M, int start) {
+        if (temp.size() == M) {
             result.add(new ArrayList<>(temp));
             return;
         }
 
         for (int i = start; i < myList.size(); i++) {
             temp.add(myList.get(i));
-            combi(myList, temp, result, target, i);
+            back(myList, temp, result, M, i);
             temp.remove(temp.size() - 1);
         }
     }
