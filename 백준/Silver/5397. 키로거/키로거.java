@@ -17,13 +17,13 @@ public class Main {
                 switch (input[i]) {
                     case "<": {
                         if (!left.isEmpty()) {
-                            right.add(left.pop());
+                            right.push(left.pop());
                         }
                         break;
                     }
                     case ">": {
                         if (!right.isEmpty()) {
-                            left.add(right.pop());
+                            left.push(right.pop());
                         }
                         break;
                     }
@@ -34,7 +34,7 @@ public class Main {
                         break;
                     }
                     default: {
-                        left.add(input[i]);
+                        left.push(input[i]);
                     }
                 }
             }
@@ -43,7 +43,7 @@ public class Main {
                 sb.append(left.pop());
             }
             sb.reverse();
-            
+
             while (!right.isEmpty()) {
                 sb.append(right.pop());
             }
