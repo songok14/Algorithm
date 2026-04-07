@@ -1,37 +1,28 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int testCase = Integer.parseInt(br.readLine());
-        String[] inputs = br.readLine().split(" ");
-        int[] arr = new int[testCase];
-        for (int i = 0; i < testCase; i++) {
-            arr[i] = Integer.parseInt(inputs[i]);
-        }
+        int n = Integer.parseInt(br.readLine());
+        int[] inputs = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
-        int[] dp = new int[testCase];
-        Arrays.fill(dp, 1);
+        int[] dp = new int[n];
+        int max = Integer.MIN_VALUE;
 
-        for (int i = 0; i < testCase; i++) {
-            int max = Integer.MIN_VALUE;
-            boolean check = false;
+        for (int i = 0; i < n; i++) {
+            dp[i] = 1;
+
             for (int j = 0; j < i; j++) {
-                if (arr[i] > arr[j] && dp[j] > max) {
-                    max = dp[j];
-                    check = true;
+                if (inputs[i] > inputs[j]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
-            if (check) {
-                dp[i] = max + 1;
-            }
+
+            max = Math.max(max, dp[i]);
         }
 
-        System.out.println(Arrays.stream(dp).max().getAsInt());
-
+        System.out.println(max);
     }
 }
