@@ -5,17 +5,14 @@ class Solution {
         int answer = 0;
 
         Queue<Integer> myQ = new PriorityQueue<>();
-        for (int i = 0; i < scoville.length; i++) {
-            myQ.add(scoville[i]);
+        for (int n : scoville) {
+            myQ.offer(n);
         }
 
-        while (!(myQ.peek() >= K)) {
-            if (myQ.size() < 2) {
-                answer = -1;
-                break;
-            }
+        while (myQ.peek() < K) {
+            if (myQ.size() < 2) return -1;
             answer++;
-            myQ.add(myQ.poll() + (myQ.poll() * 2));
+            myQ.offer(myQ.poll() + (myQ.poll() * 2));
         }
         
         return answer;
