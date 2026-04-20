@@ -3,18 +3,20 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] array, int[][] commands) {
         int[] answer = new int[commands.length];
+        Queue<Integer> myQ = new PriorityQueue<>();
 
         for (int i = 0; i < commands.length; i++) {
-            int[] temp = new int[(commands[i][1] - commands[i][0]) + 1];
-            int index = 0;
             for (int j = commands[i][0] - 1; j < commands[i][1]; j++) {
-                temp[index++] = array[j];
+                myQ.offer(array[j]);
             }
-            Arrays.sort(temp);
 
-            answer[i] = temp[commands[i][2]-1];
+            for (int k = 0; k < commands[i][2] - 1; k++) {
+                myQ.poll();
+            }
+
+            answer[i] = myQ.peek();
+            myQ.clear();
         }
-
         return answer;
     }
 }
